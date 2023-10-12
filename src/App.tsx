@@ -1,34 +1,41 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
-import Home from "./routes/Home";
-import Profile from "./routes/Profile";
-import Login from "./routes/Login";
-import Signup from "./routes/Signup";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import { useEffect, useState } from "react";
+import { auth } from "./firebase";
+import SignupPage from "./routes/SignupPage";
+import RouteUserOnly from "./components/common/RouteUserOnly";
+import LoginPage from "./routes/LoginPage";
+import HomePage from "./routes/HomePage";
+import ProfilePage from "./routes/ProfilePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <RouteUserOnly>
+        <Layout />
+      </RouteUserOnly>
+    ),
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: <ProfilePage />,
       },
     ],
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <LoginPage />,
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: <SignupPage />,
   },
 ]);
 
@@ -43,10 +50,19 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 function App() {
+  const [loaded, setLoaded] = useState(false);
+  const init = async () => {
+    // wait for firebase to auth user
+    await auth.authStateReady();
+    setLoaded(true);
+  };
+  useEffect(() => {
+    init();
+  }, []);
   return (
     <>
       <GlobalStyles />
-      <RouterProvider router={router} />
+      {!loaded ? <div>loading</div> : <RouterProvider router={router} />}
     </>
   );
 }
