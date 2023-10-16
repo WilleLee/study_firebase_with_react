@@ -7,13 +7,6 @@
     "skipLibCheck": true,
     "allowJs": true,
     "checkJs": false,
-    // "baseUrl": "./",
-    // "paths": {
-    //   "@/*": ["src/*"],
-    //   "@components/*": ["src/components/*"],
-    //   "@routes/*": ["src/routes/*"],
-    //   "@utils/*": ["src/utils/*"]
-    // },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
