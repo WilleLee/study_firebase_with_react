@@ -1,4 +1,3 @@
-import { addDoc, collection, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import {
   FormProvider,
@@ -6,9 +5,14 @@ import {
   useForm,
   useFormContext,
 } from "react-hook-form";
-import { auth, db, storage } from "../../firebase";
+
+//firebase
+import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { checkSize } from "../../utils/CommonUtils";
+import { auth, db, storage } from "@/firebase";
+
+// utils
+import { checkSize } from "@/utils/CommonUtils";
 
 type TweetData = {
   tweet: string;
@@ -38,7 +42,7 @@ const PostTweetForm = () => {
       }
       const doc = await addDoc(collection(db, "tweets"), {
         tweet: formData.tweet,
-        createdAt: new Date(),
+        createdAt: Date.now(),
         username: user.displayName || "Anonymous",
         userId: user.uid,
         image: null,
