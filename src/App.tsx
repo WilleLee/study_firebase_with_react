@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Layout from "./components/Layout";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import { useEffect, useState } from "react";
@@ -9,13 +8,14 @@ import RouteUserOnly from "./components/common/RouteUserOnly";
 import LoginPage from "./routes/LoginPage";
 import HomePage from "./routes/HomePage";
 import ProfilePage from "./routes/ProfilePage";
+import MainLayout from "./components/layouts/MainLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <RouteUserOnly>
-        <Layout />
+        <MainLayout />
       </RouteUserOnly>
     ),
     children: [

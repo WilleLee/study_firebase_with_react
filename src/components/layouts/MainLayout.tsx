@@ -1,8 +1,11 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
+import HomeSvg from "../svgs/HomeSvg";
+import UserSvg from "../svgs/UserSvg";
+import ExitSvg from "../svgs/ExitSvg";
 
-const Layout = () => {
+const MainLayout = () => {
   const navigate = useNavigate();
   const handleLogout = async () => {
     const isConfirm = confirm("Are you sure you want to logout?");
@@ -15,19 +18,25 @@ const Layout = () => {
     <Wrapper>
       <Menu>
         <Link to="/">
-          <MenuItem>Home</MenuItem>
+          <MenuItem>
+            <HomeSvg />
+          </MenuItem>
         </Link>
         <Link to="/profile">
-          <MenuItem>profile</MenuItem>
+          <MenuItem>
+            <UserSvg />
+          </MenuItem>
         </Link>
-        <MenuItem onClick={handleLogout}>logout</MenuItem>
+        <MenuItem onClick={handleLogout}>
+          <ExitSvg color="#fe7a7b" />
+        </MenuItem>
       </Menu>
       <Outlet />
     </Wrapper>
   );
 };
 
-export default Layout;
+export default MainLayout;
 
 const Wrapper = styled.div`
   width: 100%;
@@ -38,9 +47,17 @@ const Wrapper = styled.div`
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr 4fr;
-  align-items: center;
 `;
 
-const Menu = styled.div``;
+const Menu = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-end;
+`;
 
-const MenuItem = styled.div``;
+const MenuItem = styled.div`
+  width: 48px;
+  cursor: pointer;
+`;
