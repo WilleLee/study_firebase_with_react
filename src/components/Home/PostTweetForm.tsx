@@ -9,10 +9,10 @@ import {
 //firebase
 import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { auth, db, storage } from "@/firebase";
+import { auth, db, storage } from "../../firebase";
 
 // utils
-import { checkSize } from "@/utils/CommonUtils";
+import { checkSize } from "../../utils/CommonUtils";
 
 type TweetData = {
   tweet: string;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LoginForm from "@components/Login/LoginForm";
+import LoginForm from "./LoginForm";
 
 // type Props = {};
 

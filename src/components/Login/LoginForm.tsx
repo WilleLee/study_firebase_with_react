@@ -4,8 +4,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase";
-import GithubButton from "@components/auth/GithubButton";
+import { auth } from "../../firebase";
+import GithubButton from "../auth/GithubButton";
 
 type FormData = {
   email: string;
