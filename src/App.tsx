@@ -41,11 +41,25 @@ const router = createBrowserRouter([
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
+  * {
+    box-sizing: border-box;
+  }
   body {
     background-color: #000;
     color: #fff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    box-sizing: border-box;
+
+  }
+  input, textarea, button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    color: inherit;
+    font-size: inherit;
+  }
+  textarea {
+    resize: none;
   }
 `;
 

@@ -9,10 +9,16 @@ import {
 //firebase
 import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { auth, db, storage } from "../../firebase";
+import { auth, db, storage } from "../../../firebase";
 
 // utils
-import { checkSize } from "../../utils/CommonUtils";
+import { checkSize } from "../../../utils/CommonUtils";
+import Textarea from "./Textarea";
+import Form from "./Form";
+import File from "./File";
+
+//styles
+import styles from "./postTweetForm.module.scss";
 
 type TweetData = {
   tweet: string;
@@ -68,7 +74,7 @@ const PostTweetForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <Form onSubmit={methods.handleSubmit(onSubmit)} className={styles.form}>
         <PostTweetTextarea />
         <PostTweetImage />
         <input
@@ -76,15 +82,23 @@ const PostTweetForm = () => {
           disabled={isLoading}
           value={isLoading ? "Posting..." : "Tweet"}
           style={{ cursor: "pointer" }}
+          className={styles.button}
         />
-      </form>
+      </Form>
     </FormProvider>
   );
 };
 
 const PostTweetTextarea = React.memo(() => {
   const { register } = useFormContext<TweetData>();
-  return <textarea rows={5} maxLength={140} {...register("tweet")} />;
+  return (
+    <Textarea
+      rows={5}
+      maxLength={140}
+      className={styles.textarea}
+      {...register("tweet")}
+    />
+  );
 });
 
 const PostTweetImage = React.memo(() => {
@@ -100,18 +114,16 @@ const PostTweetImage = React.memo(() => {
     setValue("image", file);
   };
   return (
-    <>
-      <label htmlFor="post-tweet-image" style={{ cursor: "pointer" }}>
+    <File>
+      <File.Label htmlFor="post-tweet-image" className={styles.button}>
         {image ? "Change " : "Add "} Photo
-      </label>
-      <input
+      </File.Label>
+      <File.Input
         id="post-tweet-image"
-        type="file"
         accept="image/*"
-        style={{ display: "none" }}
         onChange={handleChangeImage}
       />
-    </>
+    </File>
   );
 });
 
