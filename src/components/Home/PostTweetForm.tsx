@@ -8,6 +8,7 @@ import {
 } from "react-hook-form";
 import { auth, db, storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { checkSize } from "../../utils/CommonUtils";
 
 type TweetData = {
   tweet: string;
@@ -25,9 +26,15 @@ const PostTweetForm = () => {
     if (!user || isLoading || formData.tweet === "") return;
     try {
       setIsLoading(true);
-      if (formData.image && formData.image.size >= 1000000) {
-        alert("Image size should be less than 1MB");
-        return;
+      if (formData.image) {
+        if (
+          !checkSize(
+            formData.image.size,
+            1000000,
+            "Image size should be less than 1MB"
+          )
+        )
+          return;
       }
       const doc = await addDoc(collection(db, "tweets"), {
         tweet: formData.tweet,
@@ -84,10 +91,8 @@ const PostTweetImage = React.memo(() => {
     const { files } = e.target;
     const file = files && files[0];
     if (!file) return;
-    if (file.size >= 1000000) {
-      alert("Image size should be less than 1MB");
+    if (!checkSize(file.size, 1000000, "Image size should be less than 1MB"))
       return;
-    }
     setValue("image", file);
   };
   return (
