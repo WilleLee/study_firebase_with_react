@@ -43,12 +43,16 @@ const GlobalStyles = createGlobalStyle`
   ${reset};
   * {
     box-sizing: border-box;
+    -webkit-tab-highlight-color: transparent;
+    &:focus {
+      outline: none;
+    }
   }
-  body {
+  html, body {
     background-color: #000;
     color: #fff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+    overscroll-behavior-y: none;
   }
   input, textarea, button {
     background-color: transparent;
@@ -76,6 +80,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
+
       {!loaded ? <div>loading</div> : <RouterProvider router={router} />}
     </>
   );

@@ -15,8 +15,8 @@ export default Home;
 
 const Wrapper = styled.div`
   width: 100%;
-  display: grid;
-  grid-template-rows: 1fr 5fr;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   overflow-y: scroll;
 `;

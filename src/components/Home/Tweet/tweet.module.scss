@@ -19,18 +19,28 @@
   justify-content: space-between;
 }
 
-.delete_button {
-  width: 74px;
+.buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.button {
+  width: 72px;
   height: 24px;
   background-color: #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  font-weight: 800;
   cursor: pointer;
   transition: background-color 0.25s ease-in-out;
 
-  &:hover {
+  &.delete:hover {
     background-color: #fe7a7b;
+  }
+  &.edit:hover {
+    background-color: #91ee92;
   }
 }
