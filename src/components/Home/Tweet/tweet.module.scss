@@ -1,0 +1,36 @@
+.wrapper {
+  width: 100%;
+  height: 140px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  img {
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+.texts {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.delete_button {
+  width: 74px;
+  height: 24px;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.25s ease-in-out;
+
+  &:hover {
+    background-color: #fe7a7b;
+  }
+}
