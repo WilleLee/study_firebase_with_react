@@ -9,8 +9,8 @@ const ProfileName = React.memo(() => {
   const [inputState, setInputState] = useState<InputState>("idle");
   const user = auth.currentUser;
   const handleClickEdit = async (newName: string) => {
-    setInputState("loading");
     if (!user) return;
+    setInputState("loading");
     try {
       await updateProfile(user, {
         displayName: newName,
